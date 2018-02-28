@@ -14,6 +14,6 @@ This model achieves over 99% accuracy tested on the same distribution as the tra
  # Data
  * The data was trained using around 3 million questions from the [Quora Questions Pairs dataset](https://www.kaggle.com/c/quora-question-pairs/data). The non-question sentences are a conglomeration of two datasets, the [Stanford Natural Language Inference Corpus](https://www.kaggle.com/stanfordu/stanford-natural-language-inference-corpus/data) and the [Amazon Fine Food Reviews
 dataset](https://www.kaggle.com/snap/amazon-fine-food-reviews/data).
-* The training data is a .csv file with three columns: 'id','questions', 'non-questions'. 
+* The training data is a .csv file with three columns: 'id','questions' and 'non-questions'. 
 
 
