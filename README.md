@@ -1,4 +1,4 @@
-# Question-Non-Question-Classifier
+# Question Non-Question Classifier
 
 This is a Question Non-Question classifier that inputs a csv file of sentences and outputs a prediction on whether each sentence is a question or not a question.
 
