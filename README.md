@@ -7,6 +7,11 @@ This model is trained using around 3 million question and around 3 million non-q
 This model achieves over 99% accuracy tested on the same distribution as the training data. 
 
 # Requirements
-*  
+*  Python (tested with v3.6.3)
+*  Numpy  (tested with v1.14.0)
+*  Keras  (tested with v2.1.3)
+ 
+ # Data
+ 
 
 
