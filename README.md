@@ -12,7 +12,7 @@ This model achieves over 99% accuracy tested on the same distribution as the tra
 *  Keras  (tested with v2.1.3)
  
  # Data
- * The data was trained using around 3 million questions from the [Quora Questions Pairs dataset.](https://www.kaggle.com/c/quora-question-pairs/data). The non-question sentences are a conglomeration of two datasets, the [Stanford Natural Language Inference Corpus](https://www.kaggle.com/stanfordu/stanford-natural-language-inference-corpus/data) and the [Amazon Fine Food Reviews
+ * The data was trained using around 3 million questions from the [Quora Questions Pairs dataset](https://www.kaggle.com/c/quora-question-pairs/data). The non-question sentences are a conglomeration of two datasets, the [Stanford Natural Language Inference Corpus](https://www.kaggle.com/stanfordu/stanford-natural-language-inference-corpus/data) and the [Amazon Fine Food Reviews
 datast](https://www.kaggle.com/snap/amazon-fine-food-reviews/data).
 
 
