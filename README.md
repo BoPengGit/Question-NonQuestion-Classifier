@@ -16,6 +16,7 @@ This model achieves over 99% accuracy tested on the same distribution as the tra
 dataset](https://www.kaggle.com/snap/amazon-fine-food-reviews/data).
 * The training data is a .csv file with three columns: 'id','questions', 'non-questions'. A smaller subset of the training data is provided under the train.csv file in the data folder.
 
+
 * To make new predictions using the pretrained model, the test input data should be a csv file with a column named 'sentences' that contains all of the sentences that the model is to classify.
 * The model will output a new .csv file that will contain the original .csv file with a new column, 'prediction' with the predicted values for each sentence.
 
