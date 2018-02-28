@@ -12,7 +12,6 @@ This model achieves over 99% accuracy tested on the same distribution as the tra
 *  Keras  (tested with v2.1.3)
  
  # Data
- ### Training Data
- The 
+ * The data was trained using around 3 million questions of the [Quora Questions Pairs dataset.](https://www.kaggle.com/c/quora-question-pairs/data) 
 
 
