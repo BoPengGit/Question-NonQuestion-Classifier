@@ -15,7 +15,7 @@ This model achieves over 99% accuracy tested on the same distribution as the tra
  * The data was trained using around 3 million questions from the [Quora Questions Pairs dataset](https://www.kaggle.com/c/quora-question-pairs/data). The non-question sentences are a conglomeration of two datasets, the [Stanford Natural Language Inference Corpus](https://www.kaggle.com/stanfordu/stanford-natural-language-inference-corpus/data) and the [Amazon Fine Food Reviews
 dataset](https://www.kaggle.com/snap/amazon-fine-food-reviews/data).
 * The training data is a .csv file with three columns: 'id','questions', 'non-questions'. A smaller subset of the training data is provided under the train.csv file in the data folder.
-//n/n
+<br/>
 * To make new predictions using the pretrained model, the test input data should be a csv file with a column named 'sentences' that contains all of the sentences that the model is to classify.
 * The model will output a new .csv file that will contain the original .csv file with a new column, 'prediction' with the predicted values for each sentence.
 
