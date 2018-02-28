@@ -26,4 +26,3 @@ dataset](https://www.kaggle.com/snap/amazon-fine-food-reviews/data).
 
 # Notes
 This project uses a significant portion of code from these two resources, [PavelOstyakov's Toxic Comment Classification Challenge](https://github.com/PavelOstyakov/toxic) and [Jeremy Howard's Improved LSTM baseline: Glove + dropout kernel](https://www.kaggle.com/jhoward/improved-lstm-baseline-glove-dropout).
-
