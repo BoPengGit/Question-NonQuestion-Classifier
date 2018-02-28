@@ -21,7 +21,7 @@ dataset](https://www.kaggle.com/snap/amazon-fine-food-reviews/data).
 * The model will output a new .csv file that will contain the original .csv file with a new column, 'prediction' with the predicted values for each sentence.
 
 # Usage
-* To make question/non-question predictions on a test set, run `python predict.py data/test.csv`. This will use the default test set. This test set can be replaced with your own test set to make new predictions.
+* To make question/non-question predictions on a test set, run `python predict.py data/test.csv`. This will use the default test set. This test set can be replaced with your own test set to make new predictions. The 'GRU.h5' and 'LSTM.h5' files should be downloaded from their eternal links in the 'utils/pretrained files/' folder and saved to the local drive before running the `predict.py` script.
 * To retrain the full model, run `python train.py data/train_2m.csv "data/word vectors/glove.6B.300d.txt" -es 300`. This will train the model using the full 'train_2m.csv' file that contains the 2 million questions and 2 million non-question sentences. This will also train the model using the GloVe 300d word embeddings. The 'train_2m.csv' file and the 'glove.6B.300d.txt' file will both need to be downloaded for the model to train. The provided 'train.csv' in the data folder file is a smaller subset of the original data. The pretrained files, 'GRU.h5', 'LSTM.h5', 'tokenizer.pickle', in the pretrained files folder were trained using the 'train_2m.csv' file with the 'glove.6B.300d.txt' word embeddings.
 
 # Notes
