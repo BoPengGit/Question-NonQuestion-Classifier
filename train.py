@@ -1,9 +1,9 @@
-import argparse, string, numpy as np, pandas as pd
+import argparse, pickle, numpy as np, pandas as pd
 
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from utils.models import GRU_model, LSTM_model
-from utils.train_utils import train_dict_embedding_matrix
+from utils.train_utils import train_dict_embedding_matrix, preprocess_training_data
 
 
 def main():
@@ -12,12 +12,13 @@ def main():
     parser.add_argument('train_file_path')
     parser.add_argument('embedding_path')
     parser.add_argument('-bs', '--batch-size', type=int, default=1000)  # training batch size
-    parser.add_argument('-sl', '--sentence-length', type=int, default=25)  # max word length of sentences
+    parser.add_argument('-sl', '--sentence-length', type=int, default=30)  # max word length of sentences
     parser.add_argument('-es', '--embed-size', type=int)  # dimension of word vectors i.e. (25, 50, 300)
     parser.add_argument('-mw', '--max-features', type=int, default=30000)  # max number of tokens in dictionary used
     parser.add_argument('-ep', '--epochs', type=int, default=2)  # number of epochs for training
-    parser.add_argument('-gm', '--gru-save-model', type=str, default='GRU.h5')
-    parser.add_argument('-lm', '--lstm-save-model', type=str, default='LSTM.h5')
+    parser.add_argument('-gm', '--gru-save-model-path', type=str, default='utils/pretrained files/GRU.h5')  # Trained GRU model  save path.
+    parser.add_argument('-lm', '--lstm-save-model-path', type=str, default='utils/pretrained files/LSTM.h5')  # Trained LSTM model save path.
+    parser.add_argument('-tp', '--tokenizer-save-path', type=str, default='utils/pretrained files/tokenizer.pickle')  # Train data Tokenizer save path.
 
     args = parser.parse_args()
 
@@ -30,18 +31,13 @@ def main():
     print('Loading data')
     data = pd.read_csv(args.train_file_path)
 
-    data['questions'] = data['questions'].fillna('_na_').values
-    data['non-questions'] = data['non-questions'].fillna('_na_').values
-
-    x_data = np.concatenate((data['questions'], data['non-questions']), axis=0)
-    x_data_no_punc = np.array([''.join((char for char in sentence if char not in string.punctuation)) for sentence in x_data])
-    y_data = np.concatenate((np.zeros(len(data['questions'])), np.ones(len(data['non-questions']))), axis=0)
+    x_data_no_punc, y_values = preprocess_training_data(data)  # removing punctuation, creating y labels for sentences
 
     print('Tokenizing data')
     tokenizer = Tokenizer(num_words=max_features)
     tokenizer.fit_on_texts(list(x_data_no_punc))
-    list_tokenized_train = tokenizer.texts_to_sequences(x_data_no_punc)
-    X_tr = pad_sequences(list_tokenized_train, maxlen=maxlen)
+    list_tokenized_data = tokenizer.texts_to_sequences(x_data_no_punc)
+    tokenized_pad_data = pad_sequences(list_tokenized_data, maxlen=maxlen)
 
     print('Creating embedding matrix for training tokens.')
     embedding_matrix = train_dict_embedding_matrix(embedding_file, tokenizer, max_features, embed_size)
@@ -49,16 +45,20 @@ def main():
     print('Training GRU model')
     GRU = GRU_model(maxlen, max_features, embed_size, embedding_matrix)
 
-    GRU.fit(X_tr, y_data, batch_size=args.batch_size, epochs=args.epochs, validation_split=0.2)
+    GRU.fit(tokenized_pad_data, y_values, batch_size=args.batch_size, epochs=args.epochs, validation_split=0.2)
 
     print('Training LSTM model')
     LSTM = LSTM_model(maxlen, max_features, embed_size, embedding_matrix)
 
-    LSTM.fit(X_tr, y_data, batch_size=args.batch_size, epochs=args.epochs, validation_split=0.2)
+    LSTM.fit(tokenized_pad_data, y_values, batch_size=args.batch_size, epochs=args.epochs, validation_split=0.2)
 
     print('Saving trained models')
-    GRU.save(args.gru_save_model)
-    LSTM.save(args.lstm_save_model)
+    GRU.save(args.gru_save_model_path)
+    LSTM.save(args.lstm_save_model_path)
+
+    print('Saving corpus Tokenizer')
+    with open(args.tokenizer_save_path, 'wb') as output_file:
+        pickle.dump(tokenizer, output_file)
 
 
 if __name__ == '__main__':

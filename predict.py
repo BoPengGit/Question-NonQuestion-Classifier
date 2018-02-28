@@ -13,6 +13,8 @@ def main():
     parser.add_argument('-gm', '--GRU-pretrained-model-path', type=str, default='utils/pretrained files/GRU.h5')
     parser.add_argument('-lm', '--LSTM-pretrained-model-path', type=str, default='utils/pretrained files/LSTM.h5')
     parser.add_argument('-op', '--output-file-path', type=str, default='predicted_results.csv')
+    parser.add_argument('-sl', '--sentence-length', type=int, default=30)
+    parser.add_argument('-bs', '--batch_size', type=int, default=32)
 
     args = parser.parse_args()
 
@@ -33,13 +35,13 @@ def main():
 
     print('Tokenizing sentences.')
     list_tokenized_data = tokenizer.texts_to_sequences(data_no_punc)
-    tokenized_pad_data = pad_sequences(list_tokenized_data, maxlen=25)
+    tokenized_pad_data = pad_sequences(list_tokenized_data, maxlen=args.sentence_length)
 
     print('Making predictions on LSTM model.')
-    LSTM_predicted = LSTM.predict(tokenized_pad_data, verbose=1)
+    LSTM_predicted = LSTM.predict(tokenized_pad_data, batch_size=1000, verbose=1)
 
     print('Making predictions on GRU model.')
-    GRU_predicted = GRU.predict(tokenized_pad_data, verbose=1)
+    GRU_predicted = GRU.predict(tokenized_pad_data, batch_size=1000, verbose=1)
 
     weighted_prediction = (GRU_predicted + LSTM_predicted) / 2
     data['prediction'] = weighted_prediction.round()
