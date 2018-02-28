@@ -25,5 +25,5 @@ dataset](https://www.kaggle.com/snap/amazon-fine-food-reviews/data).
 * To retrain the model, run `python train.py data/train.csv "data/word vectors/glove.6B.50d.txt" -es 50`. This will train the model using the train.csv file and the glove.6B.50d.txt word embeddings. The train.csv file is a smaller subset of the original data that was used to train the pretrained model. The pretrained files, GRU.h5, LSTM.h5, tokenizer.pickle, in the pretrained files folder were trained using around 3 million questions and around 3 million non-questions. It was also trained with the glove.6B.300d.txt word embeddings.
 
 # Notes
-This project uses a large portion of code from these two resources, [PavelOstyakov's Toxic Comment Classification Challenge](https://github.com/PavelOstyakov/toxic) and [Jeremy Howard's Improved LSTM baseline: Glove + dropout kernel](https://www.kaggle.com/jhoward/improved-lstm-baseline-glove-dropout).
+This project uses a significant portion of code from these two resources, [PavelOstyakov's Toxic Comment Classification Challenge](https://github.com/PavelOstyakov/toxic) and [Jeremy Howard's Improved LSTM baseline: Glove + dropout kernel](https://www.kaggle.com/jhoward/improved-lstm-baseline-glove-dropout).
 
